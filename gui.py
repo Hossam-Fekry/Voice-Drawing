@@ -7,6 +7,8 @@ root = CTk()
 root.geometry("364x446")
 root.title("Voice Drawing")
 root.resizable(False, False)
+set_appearance_mode("light")
+set_default_color_theme("dark-blue")
 
 #make the variables
 Filling_color_d = StringVar()
@@ -45,7 +47,7 @@ def start_app():
 
 #make the Filling Setting
 
-CTkLabel(root, text="Filling Color", font=("Arial", 15,"bold")).place(x=20, y=100)
+CTkLabel(root, text="Filling Color", font=("Arial", 15,"bold"), text_color="#444444").place(x=20, y=100)
 Filling_color = CTkOptionMenu(root, values=["Red", "Green", "Blue", "Yellow", "Black"], command=on_filling_color_selected)
 Filling_color.set("Select Here")  # Set default value
 Filling_color.place(x=150, y=100)
@@ -78,6 +80,6 @@ pen_hide = CTkSwitch(
 )
 pen_hide.place(x=150, y=250)
 
-Start_b = CTkButton(root, text="Start the App",command=start_app)
+Start_b = CTkButton(root, text="Start the App",command=start_app, fg_color="#4CAF50", hover_color="#3e8e41", font=("Arial", 15, "bold"),corner_radius=25)
 Start_b.place(x=120, y=350)
 root.mainloop()
