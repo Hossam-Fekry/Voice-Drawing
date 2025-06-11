@@ -2,7 +2,12 @@
 import speech_recognition as sr
 import sys
 from turtle import *
-def code():    
+def code(Filling_color_d, Pen_color_d, pen_icon_d, pen_hide):
+    fillcolor(Filling_color_d)
+    pencolor(Pen_color_d)
+    pen(pen_icon_d)
+    if pen_hide:
+        hideturtle()    
     # The dictionary
     Shapes = {
         "مربع": "Square",
@@ -13,28 +18,32 @@ def code():
 
     # Shape functions
     def Triangle():
-        hideturtle()
+        begin_fill()
         for i in range(3):
             forward(100)
             left(120)
+        end_fill()
 
     def Square():
-        hideturtle()
+        begin_fill()
         for i in range(4):
             forward(100)
             left(90)
+        end_fill()
 
     def Rectangle():
-        hideturtle()
+        begin_fill()
         for i in range(2):
             forward(100)
             left(90)
             forward(200)
             left(90)
+        end_fill()
 
     def Circle():
-        hideturtle()
+        begin_fill()
         circle(100)
+        end_fill()
 
     # Setup for speech recognition
     sys.stdout.reconfigure(encoding='utf-8')
@@ -69,6 +78,3 @@ def code():
 
     # ✅ Keep turtle window open
     done()
-
-if __name__ == "__main__":
-    code()
