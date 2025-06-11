@@ -2,12 +2,22 @@
 import speech_recognition as sr
 import sys
 from turtle import *
-def code(Filling_color_d, Pen_color_d, pen_icon_d, pen_hide):
+def code(Filling_color_d, Pen_color_d, pen_icon_d, pen_hide, background_color_d, drawing_speed_d, pen_thickness_d):
+    print(Filling_color_d, Pen_color_d, pen_icon_d, pen_hide, background_color_d, drawing_speed_d, pen_thickness_d)
+    
+    # Set the user settings
     fillcolor(Filling_color_d)
     pencolor(Pen_color_d)
-    pen(pen_icon_d)
+    shape(pen_icon_d)
     if pen_hide:
-        hideturtle()    
+        hideturtle()
+    else:
+        showturtle()
+    bgcolor(background_color_d)
+    speed(drawing_speed_d.lower())
+    pensize(pen_thickness_d)
+
+    title("Voice Drawing")
     # The dictionary
     Shapes = {
         "مربع": "Square",
@@ -18,6 +28,7 @@ def code(Filling_color_d, Pen_color_d, pen_icon_d, pen_hide):
 
     # Shape functions
     def Triangle():
+        clear()
         begin_fill()
         for i in range(3):
             forward(100)
@@ -25,6 +36,7 @@ def code(Filling_color_d, Pen_color_d, pen_icon_d, pen_hide):
         end_fill()
 
     def Square():
+        clear()
         begin_fill()
         for i in range(4):
             forward(100)
@@ -32,6 +44,7 @@ def code(Filling_color_d, Pen_color_d, pen_icon_d, pen_hide):
         end_fill()
 
     def Rectangle():
+        clear()
         begin_fill()
         for i in range(2):
             forward(100)
@@ -41,6 +54,7 @@ def code(Filling_color_d, Pen_color_d, pen_icon_d, pen_hide):
         end_fill()
 
     def Circle():
+        clear()
         begin_fill()
         circle(100)
         end_fill()

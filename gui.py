@@ -1,85 +1,118 @@
-#importing the moudule
+# importing the module
 from customtkinter import *
 import main
+from PIL import Image, ImageTk
+import tkinter as tk
 
-# settig up the gui
+# setting up the GUI
 root = CTk()
-root.geometry("364x446")
+root.geometry("364x546")
 root.title("Voice Drawing")
-root.resizable(False, False)
 set_appearance_mode("light")
 set_default_color_theme("dark-blue")
+root.iconbitmap("icon.ico")
 
-#make the variables
+# make the variables
 Filling_color_d = StringVar()
 Pen_color_d = StringVar()
 Pen_icon_d = StringVar()
-pen_hide = BooleanVar()
+pen_thickness_d = IntVar()
+area_of_shape_d = IntVar()
+background_color_d = StringVar()
+drawing_speed_d = StringVar()
+pen_hide_d = BooleanVar()
 
 # make the title
-CTkLabel(root, text="Please choose your preferences", font=("Arial", 20,"bold")).pack(pady=20)
-# make the function to be called when the option is selected
+CTkLabel(root, text="Please choose your preferences", font=("Arial", 20, "bold")).pack(pady=20)
 
+# functions called when selecting options
 def on_filling_color_selected(value):
-    global Filling_color_d
-    Filling_color_d = Filling_color.get()
-    print("Filling color selected:", Filling_color_d)
+    print("Filling color selected:", value)
 
 def on_pen_color_selected(value):
-    global Pen_color_d
-    Pen_color_d = pen_color.get()
-    print("pen color selected:", Pen_color_d)
+    print("Pen color selected:", value)
 
 def on_pen_icon_selected(value):
-    global pen_icon_d
-    pen_icon_d = pen_icon.get()
-    print("pen icon selected:", pen_icon_d)
+    print("Pen icon selected:", value)
 
+def on_pen_thickness_selected(value):
+    print("Pen thickness selected:", value)
+
+def on_background_color_selected(value):
+    print("Background color selected:", value)
+
+def on_drawing_speed_selected(value):
+    print("Drawing speed selected:", value)
+
+# function called when the Start button is clicked
 def start_app():
-    global Filling_color_d, Pen_color_d, pen_icon_d, pen_hide
-    Filling_color_d = Filling_color.get()
-    Pen_color_d = pen_color.get()
-    pen_icon_d = pen_icon.get()
-    pen_hide = pen_hide.get()
-    main.code(Filling_color_d, Pen_color_d, pen_icon_d, pen_hide)  # Call the code function with the selected values
+    Filling_color_val = Filling_color.get().lower()
+    Pen_color_val = pen_color.get().lower()
+    pen_icon_val = pen_icon.get()
+    pen_hide_val = pen_hide_d.get()
+    background_color_val = background_color.get().lower()
+    drawing_speed_val = drawing_speed.get().lower()
+    pen_thickness_val = int(pen_thickness.get())
 
-# make the settings and labels
+    # Print selected values (for debugging)
+    print("Selected Values:")
+    print("Filling color:", Filling_color_val)
+    print("Pen color:", Pen_color_val)
+    print("Pen icon:", pen_icon_val)
+    print("Hide pen:", pen_hide_val)
+    print("Background color:", background_color_val)
+    print("Drawing speed:", drawing_speed_val)
+    print("Pen thickness:", pen_thickness_val)
 
-#make the Filling Setting
+    # Call main logic
+    main.code(Filling_color_val, Pen_color_val, pen_icon_val, pen_hide_val, background_color_val, drawing_speed_val, int(pen_thickness_val))
 
-CTkLabel(root, text="Filling Color", font=("Arial", 15,"bold"), text_color="#444444").place(x=20, y=100)
+# GUI widgets:
+
+# Filling Color
+CTkLabel(root, text="Filling Color", font=("Arial", 15, "bold"), text_color="#444444").place(x=20, y=100)
 Filling_color = CTkOptionMenu(root, values=["Red", "Green", "Blue", "Yellow", "Black"], command=on_filling_color_selected)
-Filling_color.set("Select Here")  # Set default value
+Filling_color.set("Select Here")
 Filling_color.place(x=150, y=100)
 
-#make the Pen color Setting
-
-CTkLabel(root, text="Pen Color", font=("Arial", 15,"bold")).place(x=20, y=150)
+# Pen Color
+CTkLabel(root, text="Pen Color", font=("Arial", 15, "bold")).place(x=20, y=150)
 pen_color = CTkOptionMenu(root, values=["Red", "Green", "Blue", "Yellow", "Black"], command=on_pen_color_selected)
-pen_color.set("Select Here")  # Set default value
+pen_color.set("Select Here")
 pen_color.place(x=150, y=150)
 
-#make the  Setting
-
-CTkLabel(root, text="pen icon", font=("Arial", 15,"bold")).place(x=20, y=200)
+# Pen Icon
+CTkLabel(root, text="Pen Icon", font=("Arial", 15, "bold")).place(x=20, y=200)
 pen_icon = CTkOptionMenu(root, values=["arrow", "turtle", "classic"], command=on_pen_icon_selected)
-pen_icon.set("Select Here")  # Set default value
+pen_icon.set("Select Here")
 pen_icon.place(x=150, y=200)
 
+# Pen Thickness
+CTkLabel(root, text="Pen Thickness", font=("Arial", 15, "bold")).place(x=20, y=250)
+pen_thickness = CTkOptionMenu(root, values=["1", "3", "5", "8", "10"], command=on_pen_thickness_selected)
+pen_thickness.set("Select Here")
+pen_thickness.place(x=150, y=250)
 
-# make the hide pen switch
-CTkLabel(root, text="hide the pen", font=("Arial", 15,"bold")).place(x=20, y=250)
+# Background Color
+CTkLabel(root, text="Background Color", font=("Arial", 15, "bold")).place(x=20, y=300)
+background_color = CTkOptionMenu(root, values=["Red", "Green", "Blue", "Yellow", "Black"], command=on_background_color_selected)
+background_color.set("Select Here")
+background_color.place(x=150, y=300)
 
-# Create the hiding switch
+# Drawing Speed
+CTkLabel(root, text="Drawing Speed", font=("Arial", 15, "bold")).place(x=20, y=350)
+drawing_speed = CTkOptionMenu(root, values=["Slow", "normal", "fast"], command=on_drawing_speed_selected)
+drawing_speed.set("Select Here")
+drawing_speed.place(x=150, y=350)
 
+# Hide Pen Switch
+CTkLabel(root, text="Hide the Pen", font=("Arial", 15, "bold")).place(x=20, y=400)
+pen_hide = CTkSwitch(master=root, text=" ", variable=pen_hide_d)
+pen_hide.place(x=150, y=400)
 
-pen_hide = CTkSwitch(
-    master=root,
-    text=" ",
-    variable=pen_hide,
-)
-pen_hide.place(x=150, y=250)
+# Start Button
+Start_b = CTkButton(root, text="Start the App", command=start_app, fg_color="#4CAF50", hover_color="#3e8e41", font=("Arial", 15, "bold"), corner_radius=25)
+Start_b.place(x=120, y=500)
 
-Start_b = CTkButton(root, text="Start the App",command=start_app, fg_color="#4CAF50", hover_color="#3e8e41", font=("Arial", 15, "bold"),corner_radius=25)
-Start_b.place(x=120, y=350)
+# Main Loop
 root.mainloop()
