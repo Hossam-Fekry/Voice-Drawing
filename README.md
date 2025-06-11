@@ -25,6 +25,15 @@ Voice-Drawing is a Python application that listens to your voice (in Arabic) and
 - [PyAudio](https://pypi.org/project/PyAudio/) (for microphone input)
 - [turtle](https://docs.python.org/3/library/turtle.html) (usually included with Python)
 
+
+## File Structure
+
+- `main.py`: it has all the tuetle and lesting code we use it as a module to use it in the gui file
+- `mic_reading_test.py`: a file to test the microphone
+- `gui`: is the file where we wrot the gui code with custom tkinter
+- `test`: we use it to test the code
+- `README.md`: there we use markdown for documintation
+
 ## Installation
 
 1. Clone this repository or download the source files.
