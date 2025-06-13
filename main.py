@@ -2,9 +2,10 @@
 import speech_recognition as sr
 import sys
 from turtle import *
-def code(Filling_color_d, Pen_color_d, pen_icon_d, pen_hide, background_color_d, drawing_speed_d, pen_thickness_d):
-    print(Filling_color_d, Pen_color_d, pen_icon_d, pen_hide, background_color_d, drawing_speed_d, pen_thickness_d)
-    
+def code(Filling_color_d, Pen_color_d, pen_icon_d, pen_hide, background_color_d, drawing_speed_d, pen_thickness_d, side_l):
+    print(Filling_color_d, Pen_color_d, pen_icon_d, pen_hide, background_color_d, drawing_speed_d, pen_thickness_d, side_l)
+    def clear0():
+        clear()
     # Set the user settings
     fillcolor(Filling_color_d)
     pencolor(Pen_color_d)
@@ -16,6 +17,7 @@ def code(Filling_color_d, Pen_color_d, pen_icon_d, pen_hide, background_color_d,
     bgcolor(background_color_d)
     speed(drawing_speed_d.lower())
     pensize(pen_thickness_d)
+    side = side_l
 
     title("Voice Drawing")
     # The dictionary
@@ -23,15 +25,21 @@ def code(Filling_color_d, Pen_color_d, pen_icon_d, pen_hide, background_color_d,
         "مربع": "Square",
         "مستطيل": "Rectangle",
         "مثلث": "Triangle",
-        "دائره": "Circle"
-    }
+        "دائره": "Circle",
+        "خماسي الاضلاع": "Pentagon",
+        "سداسي الاضلاع": "Hexagon",
+        "سباعي الاضلاع": "Heptagon",
+        "ثماني الاضلاع": "Octagon",
+        "نجمه": "Star",
+        "قلب": "Heart",
+}
 
     # Shape functions
     def Triangle():
         clear()
         begin_fill()
         for i in range(3):
-            forward(100)
+            forward(side)
             left(120)
         end_fill()
 
@@ -39,7 +47,7 @@ def code(Filling_color_d, Pen_color_d, pen_icon_d, pen_hide, background_color_d,
         clear()
         begin_fill()
         for i in range(4):
-            forward(100)
+            forward(side)
             left(90)
         end_fill()
 
@@ -47,18 +55,68 @@ def code(Filling_color_d, Pen_color_d, pen_icon_d, pen_hide, background_color_d,
         clear()
         begin_fill()
         for i in range(2):
-            forward(100)
+            forward(side)
             left(90)
-            forward(200)
+            forward(side / 2)
             left(90)
         end_fill()
 
     def Circle():
         clear()
         begin_fill()
-        circle(100)
+        circle(side)
         end_fill()
-
+    
+    def Pentagon():
+        clear()
+        begin_fill()
+        for i in range(5):
+            forward(side)
+            left(72)
+        end_fill()
+    
+    def Hexagon():
+        clear()
+        begin_fill()
+        for i in range(6):
+            forward(side)
+            left(60)
+        end_fill()
+    
+    def Heptagon():
+        clear()
+        begin_fill()
+        for i in range(7):
+            forward(side)
+            left(51.43)
+        end_fill()
+    
+    def Octagon():
+        clear()
+        begin_fill()
+        for i in range(8):
+            forward(side)
+            left(45)
+        end_fill()
+    
+    def Star():
+        clear()
+        begin_fill()
+        for i in range(5):
+            forward(side)
+            left(144)
+        end_fill()
+    
+    def Heart():
+        clear()
+        begin_fill()
+        left(140)
+        forward(113)
+        circle(-57, 200)
+        left(120)
+        circle(-57, 200)
+        forward(113)
+        end_fill()
     # Setup for speech recognition
     sys.stdout.reconfigure(encoding='utf-8')
     recognizer = sr.Recognizer()
@@ -82,6 +140,18 @@ def code(Filling_color_d, Pen_color_d, pen_icon_d, pen_hide, background_color_d,
                 Triangle()
             elif Shapes[text] == "Circle":
                 Circle()
+            elif Shapes[text] == "Pentagon":
+                Pentagon()
+            elif Shapes[text] == "Hexagon":
+                Hexagon()
+            elif Shapes[text] == "Heptagon":
+                Heptagon()
+            elif Shapes[text] == "Octagon":
+                Octagon()
+            elif Shapes[text] == "Star":
+                Star()
+            elif Shapes[text] == "Heart":
+                Heart()
             else:
                 print("Unknown Shape")
 

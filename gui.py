@@ -20,6 +20,7 @@ pen_thickness_d = IntVar()
 area_of_shape_d = IntVar()
 background_color_d = StringVar()
 drawing_speed_d = StringVar()
+side_l = IntVar()
 pen_hide_d = BooleanVar()
 
 # make the title
@@ -53,6 +54,7 @@ def start_app():
     background_color_val = background_color.get().lower()
     drawing_speed_val = drawing_speed.get().lower()
     pen_thickness_val = int(pen_thickness.get())
+    side_length_val = int(side_l.get())
 
     # Print selected values (for debugging)
     print("Selected Values:")
@@ -63,9 +65,10 @@ def start_app():
     print("Background color:", background_color_val)
     print("Drawing speed:", drawing_speed_val)
     print("Pen thickness:", pen_thickness_val)
+    print("Side length:", side_length_val)
 
     # Call main logic
-    main.code(Filling_color_val, Pen_color_val, pen_icon_val, pen_hide_val, background_color_val, drawing_speed_val, int(pen_thickness_val))
+    main.code(Filling_color_val, Pen_color_val, pen_icon_val, pen_hide_val, background_color_val, drawing_speed_val, int(pen_thickness_val), side_length_val)
 
 # GUI widgets:
 
@@ -105,14 +108,21 @@ drawing_speed = CTkOptionMenu(root, values=["Slow", "normal", "fast"], command=o
 drawing_speed.set("Select Here")
 drawing_speed.place(x=150, y=350)
 
+CTkLabel(root, text="Side length", font=("Arial", 20, "bold"), text_color="#444444").place(x=20, y=400)
+side_l = CTkEntry(root, textvariable=area_of_shape_d, width=100, font=("Arial", 15, "bold"))
+side_l.place(x=150, y=400)
+
 # Hide Pen Switch
-CTkLabel(root, text="Hide the Pen", font=("Arial", 15, "bold")).place(x=20, y=400)
+CTkLabel(root, text="Hide the Pen", font=("Arial", 15, "bold")).place(x=20, y=450)
 pen_hide = CTkSwitch(master=root, text=" ", variable=pen_hide_d)
-pen_hide.place(x=150, y=400)
+pen_hide.place(x=150, y=450)
 
 # Start Button
 Start_b = CTkButton(root, text="Start the App", command=start_app, fg_color="#4CAF50", hover_color="#3e8e41", font=("Arial", 15, "bold"), corner_radius=25)
-Start_b.place(x=120, y=500)
+Start_b.place(x=20, y=500)
+
+Start_b = CTkButton(root, text="Clear Drawings", command=main.clear, fg_color="#FF0000", hover_color="#850000", font=("Arial", 15, "bold"), corner_radius=25)
+Start_b.place(x=210, y=500)
 
 # Main Loop
 root.mainloop()
