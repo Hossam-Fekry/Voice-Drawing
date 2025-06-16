@@ -3,6 +3,7 @@ from customtkinter import *
 import main
 from PIL import Image, ImageTk
 import tkinter as tk
+from tkinter import messagebox
 
 # setting up the GUI
 root = CTk()
@@ -53,8 +54,28 @@ def start_app():
     pen_hide_val = pen_hide_d.get()
     background_color_val = background_color.get().lower()
     drawing_speed_val = drawing_speed.get().lower()
-    pen_thickness_val = int(pen_thickness.get())
-    side_length_val = int(side_l.get())
+    pen_thickness_val = pen_thickness.get().lower()
+    side_length_val = side_l.get()
+
+    # Check if any dropdown is still on default value
+    if (Filling_color_val == "select here" or 
+        Pen_color_val == "select here" or 
+        pen_icon_val == "select here" or 
+        background_color_val == "select here" or 
+        drawing_speed_val == "select here" or 
+        pen_thickness_val == "select here"):
+        messagebox.showerror("Error", "Please select all options before starting the app.")
+        return
+
+    # Validate side length input
+    try:
+        side_length_val = int(side_length_val)
+        if side_length_val < 100:
+            messagebox.showerror("Error", "Side length must be at least 100.")
+            return
+    except ValueError:
+        messagebox.showerror("Error", "Side length must be a valid number.")
+        return
 
     # Print selected values (for debugging)
     print("Selected Values:")

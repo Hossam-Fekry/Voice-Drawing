@@ -1,33 +1,17 @@
 import customtkinter as ctk
+from tkinter import messagebox
 
-# Initialize the customtkinter theme
-ctk.set_appearance_mode("light")  # or "dark"
-ctk.set_default_color_theme("blue")  # themes: blue, green, dark-blue
+app = ctk.CTk()
+app.geometry("300x200")
 
-# Create the main window
-root = ctk.CTk()
-root.title("Toggle Switch Example")
-root.geometry("300x150")
-
-# Define a callback function for the switch
-def switch_callback():
-    if switch_var.get():
-        print("Switch is ON")
+def show_box():
+    response = messagebox.askyesno("Confirm", "Do you want to continue?")
+    if response:
+        print("User clicked Yes")
     else:
-        print("Switch is OFF")
+        print("User clicked No")
 
-# Create a variable to track the switch state
-switch_var = ctk.BooleanVar(value=False)
+btn = ctk.CTkButton(app, text="Show Message", command=show_box)
+btn.pack(pady=40)
 
-# Create the CTkSwitch
-switch = ctk.CTkSwitch(
-    master=root,
-    text="Hide the pen",
-    variable=switch_var,
-    command=switch_callback
-)
-switch.pack(pady=30)
-
-# Run the app
-root.mainloop()
-    
+app.mainloop()
